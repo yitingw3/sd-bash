@@ -1,0 +1,22 @@
+version: 2.1
+orbs:
+  matlab: mathworks/matlab@dev:v1-rc
+jobs:
+  build:
+    # environment:
+    #   MATHWORKS_RMC_BASE_URL: https://mw-ci-static-dev.s3.amazonaws.com/run-matlab-command/v2
+    #   MATHWORKS_LICENSING_ENDPOINT: stage
+
+    machine:
+      image: ubuntu-2204:2023.10.1
+    steps:
+      - checkout
+      - matlab/install:
+          release: R2023bU2
+          no-output-timeout: 30m
+      - matlab/run-command:
+          command: ver
+      - matlab/run-tests:
+          source-folder: code
+      - matlab/run-build:
+          tasks: clean mtest
