@@ -19,4 +19,4 @@ jobs:
       - matlab/run-tests:
           source-folder: code
       - matlab/run-build:
-          tasks: clean mtest
+          tasks: archive archive
